@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "echo \"Tests go here!\""
+    "test": "echo \"Tests go here!\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "^13.1.1",

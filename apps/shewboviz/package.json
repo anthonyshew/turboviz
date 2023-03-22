@@ -14,7 +14,8 @@
     "package": "pnpm build:ui && pnpm package:ui && pnpm package:server",
     "start": "NODE_ENV=production node dist/bin.js",
     "lint": "next lint",
-    "test": "echo \"Tests go here!\""
+    "test": "echo \"Tests go here!\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "cors": "^2.8.5",

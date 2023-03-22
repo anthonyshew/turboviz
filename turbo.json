@@ -9,6 +9,7 @@
     },
     "test": {},
     "lint": {},
+    "typecheck": {},
     "dev": {
       "cache": false
     }
