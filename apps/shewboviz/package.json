@@ -5,9 +5,11 @@
   "bin": "dist/bin.js",
   "scripts": {
     "dev": "tsx watch ./bin.ts",
-    "build": "next build && next export && cp -R out dist/out",
+    "build": "next build && next export",
+    "package:build": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
+    "package:server": "tsup",
+    "package": "pnpm build && pnpm package:build && pnpm package:server",
     "start": "NODE_ENV=production node server.js",
-    "package": "tsup",
     "lint": "next lint",
     "test": "echo \"Tests go here!\""
   },
