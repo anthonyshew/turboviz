@@ -1,6 +1,6 @@
 {
   "name": "@ashew/hello-world",
-  "version": "0.0.2",
+  "version": "0.0.0-canary-20230322072429",
   "bin": "./server.js",
   "scripts": {
     "dev": "node server.js",
