@@ -12,10 +12,15 @@ app.use(express.json())
 
 app.post("/create-dry", (req, res) => {
   const taskName = req.body.taskName
-  const graphBuffer = execSync(`turbo ${taskName} --dry=json`)
-  const result = JSON.parse(graphBuffer.toString())
-
-  return res.json(result.tasks)
+  try {
+    const graphBuffer = execSync(`turbo ${taskName} --dry=json`)
+    const result = JSON.parse(graphBuffer.toString())
+    return res.json(result.tasks)
+  }
+  catch (err) {
+    console.error(err)
+    return res.status(500).json({ error: "Something went wrong." })
+  }
 })
 
 app.get("*", (req, res) => {
