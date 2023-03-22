@@ -5,10 +5,14 @@ import open from 'open'
 import path from 'path'
 import handler from 'serve-handler'
 import portfinder from 'portfinder'
+import cors from 'cors'
+
+const isDev = process.env.NODE_ENV === "development"
 
 const app = express();
 
 app.use(express.json())
+app.use(cors())
 
 app.post("/create-dry", (req, res) => {
   const taskName = req.body.taskName
@@ -24,15 +28,20 @@ app.post("/create-dry", (req, res) => {
 })
 
 app.get("*", (req, res) => {
+  if (isDev) return res.send("You're probably looking for port 3000.")
   handler(req, res, {
     public: path.join(__dirname + "/out"),
   })
 });
 
-portfinder.getPortPromise({ startPort: process.env.NODE_ENV !== "production" ? 3000 : undefined })
+console.log(process.env.NODE_ENV)
+
+const devPort = process.env.NODE_ENV === "development" ? 3001 : undefined
+
+portfinder.getPortPromise({ port: devPort })
   .then((port) => {
     app.listen(port);
-    open(`http://localhost:${port}`)
+    !isDev ? open(`http://localhost:${port}`) : null
     console.log("Opening your browser...")
     console.log("If your browser didn't open, visit http://localhost:" + port);
     console.log("Welcome to Turboviz.")

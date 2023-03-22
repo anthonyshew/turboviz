@@ -19,7 +19,7 @@ const nodeWidth = 275;
 const nodeHeight = 40;
 
 const fetchRoot =
-  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "";
+  process.env.NODE_ENV === "development" ? "http://localhost:3001" : "";
 
 const Page = () => {
   const [tasks, setTasks] = useState([]);
@@ -40,7 +40,13 @@ const Page = () => {
       .catch(() => setError(true));
   }, []);
 
-  if (!tasks.length) return <p>Loading...</p>;
+  if (!tasks.length)
+    return (
+      <div className="flex flex-col items-center justify-center min-w-full min-h-screen bg-black">
+        <p className="text-white">Mapping your Turboverse...</p>
+      </div>
+    );
+
   if (error) return <p>Errored.</p>;
 
   return <ReactFlowInner tasks={tasks} />;
