@@ -91,7 +91,7 @@ export function Reactflow({
       onNodeMouseLeave={() => resetDim()}
       fitView
     >
-      <MiniMap />
+      {/* <MiniMap /> */}
       <Controls />
       <Background />
       <svg>

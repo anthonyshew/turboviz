@@ -11,11 +11,17 @@ import {
   getLayoutedElements,
 } from "./utils";
 
-export const ReactFlowInner = ({ tasks }: { tasks: Turbotask[] }) => {
+export const ReactFlowInner = ({
+  tasks,
+  activeTask,
+}: {
+  tasks: Turbotask[];
+  activeTask: string;
+}) => {
   const initialNodes: Node<TurboNodeData>[] = [
     {
       id: "___ROOT___",
-      data: { id: "___ROOT___", title: "Build" },
+      data: { id: "___ROOT___", title: activeTask },
       position: { x: 0, y: 0 },
       type: "turbo",
     },

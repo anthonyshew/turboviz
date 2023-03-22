@@ -16,10 +16,12 @@ app.use(cors())
 
 app.post("/create-dry", (req, res) => {
   const taskName = req.body.taskName
+
   try {
     const graphBuffer = execSync(`turbo ${taskName} --dry=json`)
     const result = JSON.parse(graphBuffer.toString())
-    return res.json(result.tasks)
+
+    return res.json(result)
   }
   catch (err) {
     console.error(err)
