@@ -18,11 +18,15 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 const nodeWidth = 275;
 const nodeHeight = 40;
 
+const fetchRoot =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "";
+
 const Page = () => {
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("/create-dry", {
+    fetch(`${fetchRoot}/create-dry`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,13 +36,12 @@ const Page = () => {
       }),
     })
       .then((res) => res.json())
-      .then((res) => {
-        console.log({ res });
-        setTasks(res);
-      });
+      .then((res) => setTasks(res))
+      .catch(() => setError(true));
   }, []);
 
   if (!tasks.length) return <p>Loading...</p>;
+  if (error) return <p>Errored.</p>;
 
   return <ReactFlowInner tasks={tasks} />;
 };

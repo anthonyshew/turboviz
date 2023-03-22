@@ -6,7 +6,6 @@ import handler from 'serve-handler'
 import portfinder from 'portfinder'
 
 const app = express();
-let port = Number(process.env.PORT) || 3000;
 
 app.use(express.json())
 
@@ -20,7 +19,7 @@ app.post("/create-dry", (req, res) => {
 
 app.get("*", (req, res) => handler(req, res, { public: "out" }));
 
-portfinder.getPortPromise()
+portfinder.getPortPromise({ startPort: process.env.NODE_ENV !== "production" ? 3000 : undefined })
   .then((port) => {
     app.listen(port);
     open(`http://localhost:${port}`)

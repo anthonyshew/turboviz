@@ -4,7 +4,7 @@
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
   "scripts": {
-    "dev": "tsx watch ./bin.ts",
+    "dev": "concurrently \"tsx watch ./bin.ts\" \"next dev\"",
     "build": "next build && next export",
     "package:build": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
     "package:server": "tsup",
@@ -31,6 +31,7 @@
     "@types/node": "18.14.6",
     "@types/serve-handler": "^6.1.1",
     "autoprefixer": "^10.4.14",
+    "concurrently": "^7.6.0",
     "eslint": "8.35.0",
     "eslint-config-custom": "workspace:*",
     "express": "^4.18.2",
