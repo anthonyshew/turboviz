@@ -1,7 +1,8 @@
-#!/usr/bin / env node
+#!/usr/bin/env node
 import { execSync } from 'child_process';
 import express from 'express'
 import open from 'open'
+import path from 'path'
 import handler from 'serve-handler'
 import portfinder from 'portfinder'
 
@@ -17,15 +18,21 @@ app.post("/create-dry", (req, res) => {
   return res.json(result.tasks)
 })
 
-app.get("*", (req, res) => handler(req, res, { public: "out" }));
+app.get("*", (req, res) => {
+  handler(req, res, {
+    public: path.join(__dirname + "/out"),
+  })
+});
 
 portfinder.getPortPromise({ startPort: process.env.NODE_ENV !== "production" ? 3000 : undefined })
   .then((port) => {
     app.listen(port);
     open(`http://localhost:${port}`)
-    console.log('Server started at http://localhost:' + port);
+    console.log("Opening your browser...")
+    console.log("If your browser didn't open, visit http://localhost:" + port);
+    console.log("Welcome to Turboviz.")
   })
   .catch((err) => {
-    console.error("Could not find a free port.")
+    console.error("Could not find a free port (probably).")
     throw new Error(err)
   });

@@ -1,15 +1,18 @@
 {
   "name": "@ashew/hello-world",
-  "version": "0.0.0-canary-20230322073351",
+  "version": "0.0.3-canary.12",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "concurrently \"tsx watch ./bin.ts\" \"next dev\"",
     "build": "next build && next export",
     "package:build": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
     "package:server": "tsup",
     "package": "pnpm build && pnpm package:build && pnpm package:server",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node dist/bin.js",
     "lint": "next lint",
     "test": "echo \"Tests go here!\""
   },
