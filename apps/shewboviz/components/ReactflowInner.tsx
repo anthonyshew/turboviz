@@ -45,6 +45,8 @@ export const ReactFlowInner = ({
     initialEdges
   );
 
+  console.log({ layoutedNodes, layoutedEdges });
+
   return (
     <Reactflow initialNodes={layoutedNodes} initialEdges={layoutedEdges} />
   );
