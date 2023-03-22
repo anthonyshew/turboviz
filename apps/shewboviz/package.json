@@ -1,7 +1,8 @@
 {
-  "name": "shewboviz",
+  "name": "@ashew/shewboviz",
   "version": "0.1.0",
   "private": true,
+  "bin": "./server.js",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -16,10 +17,9 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "next": "^13.2.4",
-    "node-fetch": "^3.3.1",
     "open": "^8.4.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "reactflow": "^11.5.6",
     "typescript": "4.9.5"
   },
