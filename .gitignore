@@ -8,11 +8,11 @@ node_modules
 # testing
 coverage
 
-# next.js
+# build outputs
 .next
-!apps/shewboviz/.next
 out/
 build
+dist
 
 # misc
 .DS_Store

@@ -22,7 +22,7 @@ const Page = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("/api/build-graph", {
+    fetch("/create-dry", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,6 +33,7 @@ const Page = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log({ res });
         setTasks(res);
       });
   }, []);

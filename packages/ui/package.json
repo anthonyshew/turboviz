@@ -6,7 +6,8 @@
   "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*"
+    "lint": "eslint *.ts*",
+    "test": "echo \"Tests go here!\""
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
