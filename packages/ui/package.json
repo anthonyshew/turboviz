@@ -1,7 +1,7 @@
 {
   "name": "ui",
   "version": "0.0.0",
-  "private": "true",
+  "private": true,
   "main": "./index.tsx",
   "types": "./index.tsx",
   "license": "MIT",

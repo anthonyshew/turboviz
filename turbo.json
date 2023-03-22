@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
+    "@ashew/hello-world#build": {
+      "dependsOn": ["web#build", "docs#build"]
+    },
     "lint": {
       "outputs": []
     },
