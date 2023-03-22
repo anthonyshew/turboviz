@@ -8,10 +8,10 @@
   ],
   "scripts": {
     "dev": "NODE_ENV=development concurrently \"tsx watch ./bin.ts\" \"next dev -p 3000\"",
-    "build": "next build && next export",
-    "package:build": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
+    "build:ui": "next build && next export",
+    "package:ui": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
     "package:server": "tsup",
-    "package": "pnpm build && pnpm package:build && pnpm package:server",
+    "package": "pnpm build:ui && pnpm package:ui && pnpm package:server",
     "start": "NODE_ENV=production node dist/bin.js",
     "lint": "next lint",
     "test": "echo \"Tests go here!\""
@@ -21,11 +21,12 @@
     "dagre": "^0.8.5",
     "next": "^13.2.4",
     "open": "^8.4.2",
+    "portfinder": "^1.0.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactflow": "^11.5.6",
     "serve-handler": "^6.1.5",
-    "typescript": "4.9.5",
+    "typescript": "^5.0.2",
     "ui": "workspace:*"
   },
   "devDependencies": {
@@ -40,7 +41,6 @@
     "eslint": "8.35.0",
     "eslint-config-custom": "workspace:*",
     "express": "^4.18.2",
-    "portfinder": "^1.0.32",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "tsup": "^6.7.0",

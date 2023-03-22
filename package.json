@@ -1,5 +1,5 @@
 {
-  "name": "test-turborepo",
+  "name": "turboviz",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -7,10 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "start": "NODE_ENV=production node server.js",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {

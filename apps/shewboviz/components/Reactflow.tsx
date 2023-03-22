@@ -1,6 +1,6 @@
-import { useCallback, MouseEvent } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
-  // MiniMap,
+  MiniMap,
   Node,
   Edge,
   Controls,
@@ -12,18 +12,8 @@ import ReactFlow, {
   // useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import TurboNode, { TurboNodeData } from "./TurboNode";
+import TurboNode from "./TurboNode";
 import TurboEdge from "./TurboEdge";
-// @ts-ignore
-import dagre from "dagre";
-import { Turbotask } from "../types";
-import { formatTaskToNode } from "./utils";
-
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-const nodeWidth = 275;
-const nodeHeight = 40;
 
 const nodeTypes = {
   turbo: TurboNode,
@@ -101,7 +91,7 @@ export function Reactflow({
       onNodeMouseLeave={() => resetDim()}
       fitView
     >
-      {/* <MiniMap /> */}
+      <MiniMap />
       <Controls />
       <Background />
       <svg>

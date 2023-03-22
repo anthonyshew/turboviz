@@ -2,6 +2,16 @@ import { Edge, Node } from "reactflow";
 import { Turbotask } from "../types";
 import { TurboNodeData } from "./TurboNode";
 
+// dagre doesn't have types :)
+// @ts-ignore
+import dagre from "dagre";
+
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+const nodeWidth = 275;
+const nodeHeight = 40;
+
 export const filterEmptyTasks = (task: Turbotask) =>
   !task.command.includes("NONEXISTENT");
 
@@ -31,3 +41,41 @@ export const formatTaskToNode = (
   data: { id: task.taskId, title: task.taskId },
   type: "turbo",
 });
+
+export const topLevelTasks = (tasks: Turbotask[]) =>
+  tasks
+    .filter((task) => !task.dependents.length)
+    .map(formatTaskToNode)
+
+export const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+  dagreGraph.setGraph({ rankdir: "LR" });
+
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+  });
+
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(dagreGraph);
+
+  nodes.forEach((node) => {
+    const nodeWithPosition = dagreGraph.node(node.id);
+    // @ts-ignore
+    node.targetPosition = isHorizontal ? "left" : "top";
+    // @ts-ignore
+    node.sourcePosition = isHorizontal ? "right" : "bottom";
+
+    // We are shifting the dagre node position (anchor=center center) to the top left
+    // so it matches the React Flow node anchor point (top left).
+    node.position = {
+      x: nodeWithPosition.x - nodeWidth / 2,
+      y: nodeWithPosition.y - nodeHeight / 2,
+    };
+
+    return node;
+  });
+
+  return { nodes, edges };
+};
