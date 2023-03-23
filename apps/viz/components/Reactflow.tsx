@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import ReactFlow, {
   MiniMap,
   Node,
@@ -12,8 +12,16 @@ import ReactFlow, {
   // useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import TurboNode from "./TurboNode";
+import TurboNode, { TurboNodeData } from "./TurboNode";
 import TurboEdge from "./TurboEdge";
+import { Turbotask } from "../types";
+import {
+  edgesBuilder,
+  filterEmptyTasks,
+  formatTaskToNode,
+  getLayoutedElements,
+  topLevelTasks,
+} from "./utils";
 
 const nodeTypes = {
   turbo: TurboNode,
@@ -26,18 +34,50 @@ const edgeTypes = {
 export function Reactflow({
   initialNodes,
   initialEdges,
+  tasks,
+  activeTask,
 }: {
   initialNodes: Node[];
   initialEdges: Edge[];
+  tasks: Turbotask[];
+  activeTask: string;
 }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   // const { setViewport, zoomIn, zoomOut } = useReactFlow();
 
+  useEffect(() => {
+    const nextNodes: Node<TurboNodeData>[] = [
+      {
+        id: "___ROOT___",
+        data: { id: "___ROOT___", title: activeTask },
+        position: { x: 0, y: 0 },
+        type: "turbo",
+      },
+      ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
+    ];
+
+    const nextEdges: Edge[] = [
+      ...topLevelTasks(tasks).map(
+        (task): Edge => ({
+          id: `___ROOT___-${task.id}`,
+          source: "___ROOT___",
+          target: task.id,
+          className: "full-opacity",
+        })
+      ),
+      ...edgesBuilder(tasks),
+    ];
+
+    const { nodes, edges } = getLayoutedElements(nextNodes, nextEdges);
+
+    setNodes(nodes);
+    setEdges(edges);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tasks, activeTask]);
+
   const getNeighbors = (targetId: string) => {
-    // console.log({ targetId });
     const edgesToNeighbors = edges.filter((edge) => edge.id.includes(targetId));
-    // console.log({ edgesToNeighbors });
     const neighbors: Node[] = [];
     edgesToNeighbors.forEach((edge) => {
       const foundNode = nodes.find(
@@ -46,7 +86,6 @@ export function Reactflow({
 
       if (!foundNode) return;
       neighbors.push(foundNode);
-      console.log({ neighbors });
     });
 
     setNodes((nodes) => [
@@ -56,7 +95,6 @@ export function Reactflow({
         className: "full-opacity background-green",
       })),
     ]);
-    console.log(neighbors);
   };
 
   const resetDim = () => {

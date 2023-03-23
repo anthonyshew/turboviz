@@ -48,6 +48,11 @@ export const ReactFlowInner = ({
   console.log({ layoutedNodes, layoutedEdges });
 
   return (
-    <Reactflow initialNodes={layoutedNodes} initialEdges={layoutedEdges} />
+    <Reactflow
+      initialNodes={layoutedNodes}
+      initialEdges={layoutedEdges}
+      tasks={tasks}
+      activeTask={activeTask}
+    />
   );
 };
