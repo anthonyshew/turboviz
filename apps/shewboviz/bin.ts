@@ -36,8 +36,6 @@ app.get("*", (req, res) => {
   })
 });
 
-console.log(process.env.NODE_ENV)
-
 const devPort = process.env.NODE_ENV === "development" ? 3001 : undefined
 
 portfinder.getPortPromise({ port: devPort })

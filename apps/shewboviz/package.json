@@ -1,6 +1,6 @@
 {
   "name": "@ashew/hello-world",
-  "version": "0.0.3-canary.12",
+  "version": "0.0.3-canary.14",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
   "files": [
