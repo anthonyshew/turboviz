@@ -53,7 +53,7 @@ const Page = () => {
 
   if (error) return <p>Errored.</p>;
 
-  if (isLoading) return null;
+  // if (isLoading) return null;
 
   return (
     <div>
