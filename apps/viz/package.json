@@ -11,7 +11,7 @@
     "build:ui": "next build && next export",
     "package:ui": "mkdir -p dist && rm -rf dist/out && cp -R ./out dist/out/",
     "package:server": "tsup",
-    "package": "pnpm build:ui && pnpm package:ui && pnpm package:server",
+    "build": "pnpm build:ui && pnpm package:ui && pnpm package:server",
     "start": "NODE_ENV=production node dist/bin.js",
     "lint": "next lint",
     "test": "echo \"Tests go here!\"",
