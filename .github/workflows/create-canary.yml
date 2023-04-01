@@ -48,3 +48,4 @@ jobs:
         run: |
           npx changeset pre exit
           npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
+          npx changeset publish --tag canary.${{env.NEXT_CANARY}}
