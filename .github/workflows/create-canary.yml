@@ -2,6 +2,8 @@ name: Canary
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 on:
   push:
@@ -43,6 +45,4 @@ jobs:
           echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
 
       - name: Publish
-        run: |
-          npx changeset pre enter next
-          npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
+        run: npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
