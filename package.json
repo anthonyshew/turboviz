@@ -8,7 +8,10 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "turbo dev --filter=@ashew/turboviz",
+    "dev:all": "turbo dev",
+    "start": "node ./apps/viz/dist/bin.js",
+    "start:all": "turbo start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "typecheck": "turbo typecheck --continue"
