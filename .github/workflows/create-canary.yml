@@ -32,7 +32,7 @@ jobs:
           node-version: 18
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install --filter "@ashew/turboviz^..."
+        run: pnpm install
 
       - name: Build distributable
         run: turbo build --filter=@ashew/turboviz
