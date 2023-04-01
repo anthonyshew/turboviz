@@ -9,8 +9,8 @@ import dagre from "dagre";
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 400;
-const nodeHeight = 80;
+const nodeWidth = 350;
+const nodeHeight = 50;
 
 export const filterEmptyTasks = (task: Turbotask) =>
   !task.command.includes("NONEXISTENT");
