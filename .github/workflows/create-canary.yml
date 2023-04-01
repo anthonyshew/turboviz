@@ -43,4 +43,6 @@ jobs:
           echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
 
       - name: Publish
-        run: npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
+        run: |
+          npx changeset pre enter next
+          npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
