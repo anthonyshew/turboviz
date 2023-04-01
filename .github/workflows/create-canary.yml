@@ -10,7 +10,7 @@ on:
 
 jobs:
   release:
-    name: release
+    name: Publish canary
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -24,7 +24,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
       - name: Install turbo
-        run: pnpm i turbo@latest
+        run: pnpm i -g turbo@latest
 
       - name: Use Node.js 18
         uses: actions/setup-node@v3
