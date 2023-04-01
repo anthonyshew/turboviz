@@ -54,5 +54,5 @@ jobs:
 
       - name: Publish
         run: |
-          npx changeset version --snapshot canary
-          npx changeset publish --tag canary
+          npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
+          npx changeset publish --tag canary.${{env.NEXT_CANARY}}
