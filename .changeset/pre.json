@@ -3,7 +3,7 @@
   "tag": "next",
   "initialVersions": {
     "docs": "0.0.0",
-    "@ashew/hello-world": "0.0.0-canary-20230322073351",
+    "@ashew/hello-world": "0.0.0",
     "web": "0.0.0",
     "eslint-config-custom": "0.0.0",
     "tsconfig": "0.0.0",

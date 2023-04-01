@@ -39,6 +39,14 @@ jobs:
       - name: Build distributable
         run: turbo build --filter=@ashew/turboviz
 
+      - name: Create .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Get next canary version
         run: |
           NEXT_CANARY=$(node ./scripts/incrementCanary.js)
@@ -46,6 +54,5 @@ jobs:
 
       - name: Publish
         run: |
-          npx changeset pre exit
           npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
           npx changeset publish --tag canary.${{env.NEXT_CANARY}}
