@@ -11,6 +11,7 @@ const getNextVersion = () => {
     .replace("latest", '"latest"')
     .replace(" ", "");
 
+  console.log(toString);
   const result = JSON.parse(toString);
   return result.next;
 };
@@ -22,6 +23,7 @@ const incrementCanary = (versionString) => {
   const nextTag = Number(currentVersion) + 1;
   // const nextCanary = splitted.slice(0, -1).concat(nextTag).join(".")
 
+  console.log(nextTag);
   return nextTag;
 };
 
