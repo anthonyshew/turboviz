@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { ReactFlowInner } from "../components/ReactflowInner";
 import { Select } from "../components/Select";
