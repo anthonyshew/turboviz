@@ -28,9 +28,8 @@ const incrementCanary = (versionString) => {
 
 const main = () => {
   const npmNextVersion = getNextVersion()
-  console.log({ npmNextVersion })
-  const nextCanary = incrementCanary(npmNextVersion)
-  console.log({ nextCanary })
+  const nextCanaryTag = incrementCanary(npmNextVersion)
+  console.log(nextCanaryTag)
 }
 
 main()

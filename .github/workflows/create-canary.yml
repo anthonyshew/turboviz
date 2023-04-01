@@ -1,0 +1,46 @@
+name: Canary
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+on:
+  push:
+    branches:
+      - canary
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - uses: actions/setup-node@master
+        with:
+          node-version: 18.x
+
+      - uses: pnpm/action-setup@v2
+      - name: Install turbo
+        run: pnpm i turbo@latest
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --filter "@ashew/turboviz^..."
+
+      - name: Build distributable
+        run: turbo build --filter=@ashew/turboviz
+
+      - name: Get next canary version
+        run: |
+          NEXT_CANARY=$(node ./scripts/incrementCanary.js)
+          echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
+
+      - name: Publish
+        run: npx changeset version --snapshot canary.${{env.NEXT_CANARY}}
