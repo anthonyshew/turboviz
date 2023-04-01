@@ -54,5 +54,6 @@ jobs:
 
       - name: Publish
         run: |
-          npx changeset version --snapshot next
-          npx changeset publish --tag next
+          npx changeset pre enter next
+          npx changeset version
+          npx changeset publish

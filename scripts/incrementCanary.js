@@ -18,8 +18,8 @@ const getNextVersion = () => {
 
 const incrementCanary = (versionString) => {
   const splitted = versionString.split(".");
-  const lastIndex = splitted.length - 1;
-  const currentVersion = splitted[lastIndex];
+  // There will be a third index if this is the
+  const currentVersion = splitted[3];
   const nextTag = Number(currentVersion) + 1;
   // const nextCanary = splitted.slice(0, -1).concat(nextTag).join(".")
 
