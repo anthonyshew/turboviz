@@ -2,13 +2,21 @@
   "name": "ui",
   "version": "0.0.0",
   "private": true,
-  "main": "./index.tsx",
-  "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*",
+    "lint": "eslint src/*.tsx*",
     "test": "echo \"Tests go here!\"",
     "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.ts"
+      ]
+    }
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

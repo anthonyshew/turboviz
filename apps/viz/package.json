@@ -1,6 +1,6 @@
 {
-  "name": "@ashew/hello-world",
-  "version": "0.0.3-canary.14",
+  "name": "@ashew/turboviz",
+  "version": "0.0.1-canary.3",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
   "files": [
