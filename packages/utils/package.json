@@ -1,0 +1,16 @@
+
+{
+  "name": "utils",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "lint": "echo \"A lint goes here!\"",
+    "test": "echo \"Tests go here!\"",
+    "build": "echo \"A build goes here!\"",
+    "typecheck": "echo \"A typecheck goes here!\""
+  },
+  "dependencies": {
+    "utils-more": "workspace:*"
+  }
+}

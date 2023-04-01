@@ -4,14 +4,18 @@
   "globalEnv": ["PORT", "NODE_ENV"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^lint", "^test", "^build"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "test": {},
     "lint": {},
+    "start": {
+      "persistent": true
+    },
     "typecheck": {},
     "dev": {
-      "cache": false
+      "cache": false,
+      "persistent": true
     }
   }
 }

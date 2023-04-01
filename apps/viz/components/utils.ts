@@ -2,15 +2,15 @@ import { Edge, Node } from "reactflow";
 import { Turbotask } from "../types";
 import { TurboNodeData } from "./TurboNode";
 
-// dagre doesn't have types :)
+// dagre doesn't have types but that's okay :)
 // @ts-ignore
 import dagre from "dagre";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 275;
-const nodeHeight = 40;
+const nodeWidth = 400;
+const nodeHeight = 80;
 
 export const filterEmptyTasks = (task: Turbotask) =>
   !task.command.includes("NONEXISTENT");

@@ -15,11 +15,20 @@ app.use(express.json())
 app.use(cors())
 
 app.post("/create-dry", (req, res) => {
+  console.time("/create-dry")
   const taskName = req.body.taskName
 
   try {
+    console.log("starting try block")
+    console.timeLog("/create-dry")
+
     const graphBuffer = execSync(`turbo ${taskName} --dry=json`)
+    console.log("Made dry json output")
+    console.timeLog("/create-dry")
+
     const result = JSON.parse(graphBuffer.toString())
+    console.log("Parsed result")
+    console.timeEnd("/create-dry")
 
     return res.json(result)
   }
