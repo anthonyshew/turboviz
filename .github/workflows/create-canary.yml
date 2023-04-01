@@ -47,10 +47,10 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Get next canary version
-      #   run: |
-      #     NEXT_CANARY=$(node ./scripts/incrementCanary.js)
-      # echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
+      - name: Get next canary version
+        run: |
+          NEXT_CANARY=$(node ./scripts/incrementCanary.js)
+          echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
 
       - name: Publish
         run: |

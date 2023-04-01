@@ -23,7 +23,6 @@ const incrementCanary = (versionString) => {
   const nextTag = Number(currentVersion) + 1;
   // const nextCanary = splitted.slice(0, -1).concat(nextTag).join(".")
 
-  console.log(nextTag);
   return nextTag;
 };
 
