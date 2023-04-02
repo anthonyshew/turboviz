@@ -1,5 +1,14 @@
 # @ashew/turboviz
 
+## 0.0.5
+
+### Patch Changes
+
+- 635c0a6: Doing better now?
+- 400d969: Here we go.
+- eea1191: Okayyyyy, nice.
+- 01c0680: Remove analytics package.
+
 ## 0.0.5-canary.2
 
 ### Patch Changes
