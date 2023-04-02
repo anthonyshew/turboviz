@@ -67,7 +67,7 @@ jobs:
           npx changeset version
           npx changeset publish
 
-      - name: Commit back to stage
+      - name: Commit back to canary branch
         run: |
           git config --global user.name 'Anthony Shew'
           git config --global user.email 'anthonyshew@users.noreply.github.com'
