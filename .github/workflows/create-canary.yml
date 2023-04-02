@@ -56,6 +56,14 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Check prerelease state
+        run: |
+          URL=$(node ./scripts/check-prerelease.js)
+          echo "MODE=$MODE" >> $GITHUB_ENV
+
+      - name: Check prerelease mode
+        run: node ./scripts/check-prerelease.js
+
       - name: Publish
         run: |
           npx changeset version

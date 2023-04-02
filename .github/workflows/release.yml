@@ -56,6 +56,9 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Check release mode
+        run: node ./scripts/check-release.js
+
       - name: Publish
         run: |
           npx changeset pre exit
