@@ -18,9 +18,10 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
+    "@types/node": "^18.15.11",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "turbo": "^1.8.8"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { ReactFlowInner } from "../components/ReactflowInner";
@@ -46,12 +46,13 @@ const Page = () => {
       .catch(() => setError(true));
   }, [workspace, taskName]);
 
-  if (!tasks.length)
+  if (!tasks.length) {
     return (
       <div className="flex flex-col items-center justify-center min-w-full min-h-screen bg-black">
         <p className="text-white">Mapping your Turboverse...</p>
       </div>
     );
+  }
 
   if (error) return <p>Errored.</p>;
 
