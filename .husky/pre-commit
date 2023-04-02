@@ -3,3 +3,4 @@
 
 pnpm format
 pnpm lint
+pnpm staged
