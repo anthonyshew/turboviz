@@ -1,4 +1,4 @@
-name: Canary
+name: Release
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -10,14 +10,18 @@ permissions:
   issues: write
   pull-requests: write
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
-      - canary
+      - release
 
 jobs:
   release:
-    name: Publish canary
+    name: Publish release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -29,15 +33,21 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: pnpm/action-setup@v2
-      - name: Install turbo
-        run: pnpm i -g turbo@latest
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
 
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "pnpm"
+
+      - name: Check release mode
+        run: node ./scripts/check-release.js
+
+      - name: Install turbo
+        run: pnpm i -g turbo@latest
+
       - name: Install dependencies
         run: pnpm install
 
@@ -54,6 +64,7 @@ jobs:
 
       - name: Publish
         run: |
+          npx changeset pre exit
           npx changeset version
           npx changeset publish
 
@@ -62,6 +73,6 @@ jobs:
           git config --global user.name 'Anthony Shew'
           git config --global user.email 'anthonyshew@users.noreply.github.com'
           git add . :^.npmrc
-          git commit -am "Update branch with release."
+          git commit -am "[CI] Update branch with release."
           git push origin release --follow-tags
           git push origin main --follow-tags
