@@ -32,7 +32,7 @@ body:
     id: "turboviz-version"
     attributes:
       label: "Turboviz Version"
-      description: "The version of turboviz UI you use."
+      description: "The version of turboviz you use."
       placeholder: "@latest"
     validations:
       required: true
