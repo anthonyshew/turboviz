@@ -1,5 +1,11 @@
 # @ashew/turboviz
 
+## 0.0.5-canary.2
+
+### Patch Changes
+
+- eea1191: Okayyyyy, nice.
+
 ## 0.0.5-canary.1
 
 ### Patch Changes
