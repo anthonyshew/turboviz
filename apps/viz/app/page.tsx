@@ -30,6 +30,7 @@ const Page = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log({res})
         setIsLoading(false);
         setTaskList(
           // @ts-ignore
@@ -46,12 +47,14 @@ const Page = () => {
       .catch(() => setError(true));
   }, [workspace, taskName]);
 
-  if (!tasks.length)
+  if (!tasks.length) {
+  console.log(tasks)
     return (
       <div className="flex flex-col items-center justify-center min-w-full min-h-screen bg-black">
         <p className="text-white">Mapping your Turboverse...</p>
       </div>
     );
+  }
 
   if (error) return <p>Errored.</p>;
 
