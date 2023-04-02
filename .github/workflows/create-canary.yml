@@ -66,5 +66,5 @@ jobs:
           git config --global user.name 'Anthony Shew'
           git config --global user.email 'anthonyshew@users.noreply.github.com'
           git add . :^.npmrc
-          git commit -am "Update canary on branch with version."
+          git commit -am "[CI] Update canary on branch with version."
           git push origin canary --follow-tags
