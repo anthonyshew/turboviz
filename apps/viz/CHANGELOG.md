@@ -1,5 +1,11 @@
 # @ashew/turboviz
 
+## 0.0.6-canary.0
+
+### Patch Changes
+
+- ab8db5d: Release the kraken!
+
 ## 0.0.5
 
 ### Patch Changes
