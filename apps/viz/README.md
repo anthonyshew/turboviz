@@ -1,4 +1,4 @@
-# Shewboviz(?)
+# Turboviz
 
 An unofficial ClI tool for a Turborepo task visualizer.
 
