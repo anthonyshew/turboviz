@@ -1,5 +1,11 @@
 # @ashew/turboviz
 
+## 0.0.6-canary.1
+
+### Patch Changes
+
+- 409c744: Send it!
+
 ## 0.0.6-canary.0
 
 ### Patch Changes
