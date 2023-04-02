@@ -58,6 +58,7 @@ jobs:
 
       - name: Publish
         run: |
+          npx changeset pre exit
           npx changeset version
           npx changeset publish
 
