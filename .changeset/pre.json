@@ -14,6 +14,7 @@
     "utils-more": "0.0.0"
   },
   "changesets": [
-    "proud-geese-dance"
+    "proud-geese-dance",
+    "rude-impalas-fix"
   ]
 }
