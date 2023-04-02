@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { ReactFlowInner } from "../components/ReactflowInner";
@@ -30,7 +30,6 @@ const Page = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log({res})
         setIsLoading(false);
         setTaskList(
           // @ts-ignore
@@ -48,7 +47,6 @@ const Page = () => {
   }, [workspace, taskName]);
 
   if (!tasks.length) {
-  console.log(tasks)
     return (
       <div className="flex flex-col items-center justify-center min-w-full min-h-screen bg-black">
         <p className="text-white">Mapping your Turboverse...</p>
