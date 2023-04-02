@@ -1,4 +1,4 @@
-name: Canary
+name: Release
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -21,7 +21,7 @@ on:
 
 jobs:
   release:
-    name: Publish canary
+    name: Publish release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
