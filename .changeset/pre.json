@@ -1,9 +1,9 @@
 {
   "mode": "pre",
-  "tag": "next",
+  "tag": "canary",
   "initialVersions": {
     "docs": "0.0.0",
-    "@ashew/turboviz": "0.0.4",
+    "@ashew/turboviz": "0.0.0",
     "web": "0.0.0",
     "analytics": "0.0.0",
     "eslint-config-custom": "0.0.0",
