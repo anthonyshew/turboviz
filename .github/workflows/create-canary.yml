@@ -33,15 +33,20 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: pnpm/action-setup@v2
-      - name: Install turbo
-        run: pnpm i -g turbo@latest
-
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "pnpm"
+
+      - name: Check prerelease mode
+        run: node ./scripts/check-prerelease.js
+
+      - uses: pnpm/action-setup@v2
+
+      - name: Install turbo
+        run: pnpm i -g turbo@latest
+
       - name: Install dependencies
         run: pnpm install
 
@@ -55,14 +60,6 @@ jobs:
           EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Check prerelease state
-        run: |
-          URL=$(node ./scripts/check-prerelease.js)
-          echo "MODE=$MODE" >> $GITHUB_ENV
-
-      - name: Check prerelease mode
-        run: node ./scripts/check-prerelease.js
 
       - name: Publish
         run: |
