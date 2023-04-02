@@ -1,5 +1,10 @@
 {
   "name": "@ashew/turboviz",
+  "description": "A visualization studio to help with your Turborepo.",
+  "author": {
+    "name": "Anthony Shew",
+    "url": "https://twitter.com/anthonysheww"
+  },
   "version": "0.0.6",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
@@ -52,5 +57,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/anthonyshew/turboviz/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthonyshew/turboviz/issues"
   }
 }

@@ -1,5 +1,10 @@
 {
   "name": "turboviz",
+  "description": "A visualization studio to help with your Turborepo.",
+  "author": {
+    "name": "Anthony Shew",
+    "url": "https://twitter.com/anthonysheww"
+  },
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -7,10 +12,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo build",
     "dev": "turbo dev --filter=@ashew/turboviz",
-    "dev:all": "turbo dev",
+    "build": "turbo build --filter=@ashew/turboviz",
     "start": "node ./apps/viz/dist/bin.js",
+    "build:all": "turbo build",
+    "dev:all": "turbo dev",
     "start:all": "turbo start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -23,8 +29,12 @@
     "prettier": "latest",
     "turbo": "latest"
   },
-  "engines": {
-    "node": ">=14.0.0"
+  "packageManager": "pnpm@8.0.0",
+  "bugs": {
+    "url": "https://github.com/anthonyshew/turboviz/issues"
   },
-  "packageManager": "pnpm@7.27.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthonyshew/turboviz/issues"
+  }
 }
