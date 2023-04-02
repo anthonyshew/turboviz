@@ -17,7 +17,7 @@ concurrency:
 on:
   push:
     branches:
-      - canary
+      - release
 
 jobs:
   release:
