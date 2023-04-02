@@ -15,7 +15,6 @@ app.use(express.json())
 app.use(cors())
 
 app.post("/create-dry", (req, res) => {
-  console.time("/create-dry")
   const taskName = req.body.taskName
 
   try {
