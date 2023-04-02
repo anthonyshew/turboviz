@@ -39,21 +39,15 @@ jobs:
       - name: Build distributable
         run: turbo build --filter=@ashew/turboviz
 
-      - name: Create .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # - name: Get next canary version
-      #   run: |
-      #     NEXT_CANARY=$(node ./scripts/incrementCanary.js)
-      #     echo "NEXT_CANARY=$NEXT_CANARY" >> $GITHUB_ENV
-
       - name: Publish
         run: |
           npx changeset pre enter next
           npx changeset version
           npx changeset publish
+
+      - name: Commit back to stage
+        run: |
+          git config --global user.name 'Anthony Shew'
+          git config --global user.email 'anthonyshew@users.noreply.github.com'
+          git commit -am "Update canary on stage."
+          git push origin canary
