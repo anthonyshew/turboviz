@@ -57,10 +57,11 @@ jobs:
           npx changeset version
           npx changeset publish
 
-      - name: Commit back to stage
+      - name: Commit back to release and main branches
         run: |
           git config --global user.name 'Anthony Shew'
           git config --global user.email 'anthonyshew@users.noreply.github.com'
           git add . :^.npmrc
-          git commit -am "Update canary on branch with version."
-          git push origin canary --follow-tags
+          git commit -am "Update branch with release."
+          git push origin release --follow-tags
+          git push origin main --follow-tags
