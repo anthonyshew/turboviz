@@ -1,6 +1,6 @@
 {
   "name": "@ashew/turboviz",
-  "version": "0.0.5-canary.0",
+  "version": "0.0.5-canary.1",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
   "files": [
