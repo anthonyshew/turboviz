@@ -7,12 +7,14 @@ importers:
       '@changesets/cli': ^2.26.0
       '@types/node': ^18.15.11
       eslint-config-custom: workspace:*
+      husky: ^8.0.0
       prettier: latest
       turbo: latest
     devDependencies:
       '@changesets/cli': 2.26.0
       '@types/node': 18.15.11
       eslint-config-custom: link:packages/eslint-config-custom
+      husky: 8.0.3
       prettier: 2.8.7
       turbo: 1.8.8
 
@@ -3648,6 +3650,12 @@ packages:
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+    dev: true
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /iconv-lite/0.4.24:
