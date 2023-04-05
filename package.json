@@ -20,7 +20,6 @@
     "start:all": "turbo start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "staged": "git stash -k --include-untracked; git stash apply;",
     "typecheck": "turbo typecheck --continue",
     "prepare": "husky install"
   },
