@@ -1,16 +1,15 @@
-# Turboviz
+# An unofficial studio for your Turborepo
 
-An unofficial ClI tool for a Turborepo task visualizer.
+At the root of your Turborepo, run:
 
-This repository is currently an unversioned work-in-progress.
+`npx @ashew/turboviz@latest`
 
-You're mostly looking at a `create-next-app` starter but with two major differences:
+Features:
 
-- `main.ts` has the script for what we eventually plan on doing for the tool
-- `test-turborepo` has an `npx create-turbo` starter to run the script against
+- [x] Pipeline visualizer
 
-(Outdated!) To use what we have so far:
+![Pipeline visualizer](/assets/graph.png)
 
-- Make sure you've got a Next.js build (`pnpm build`)
-- Run the Next.js server (`pnpm start`)
-- Run against the test repo (in a new terminal, `pnpm launch`)
+- [ ] Internal Dependency mapper
+- [ ] Single version dep checker
+- [ ] Package exports checker

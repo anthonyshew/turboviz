@@ -1,0 +1,19 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "docs": "0.0.0",
+    "@ashew/turboviz": "0.0.6",
+    "web": "0.0.0",
+    "analytics": "0.0.0",
+    "eslint-config-custom": "0.0.0",
+    "logger": "0.0.0",
+    "tsconfig": "0.0.0",
+    "ui": "0.0.0",
+    "utils": "0.0.0",
+    "utils-more": "0.0.0"
+  },
+  "changesets": [
+    "purple-pillows-film"
+  ]
+}
