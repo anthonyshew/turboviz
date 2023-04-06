@@ -43,9 +43,7 @@ export const formatTaskToNode = (
 });
 
 export const topLevelTasks = (tasks: Turbotask[]) =>
-  tasks
-    .filter((task) => !task.dependents.length)
-    .map(formatTaskToNode)
+  tasks.filter((task) => !task.dependents.length).map(formatTaskToNode);
 
 export const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
   dagreGraph.setGraph({ rankdir: "LR" });
@@ -63,9 +61,9 @@ export const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
   nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
     // @ts-ignore
-    node.targetPosition = "left"
+    node.targetPosition = "left";
     // @ts-ignore
-    node.sourcePosition = "right"
+    node.sourcePosition = "right";
 
     // We are shifting the dagre node position (anchor=center center) to the top left
     // so it matches the React Flow node anchor point (top left).

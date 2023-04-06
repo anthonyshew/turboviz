@@ -2,4 +2,4 @@
 "@ashew/turboviz": patch
 ---
 
-Hereeee we go.
+Moving things to devDeps.
