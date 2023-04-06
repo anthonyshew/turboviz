@@ -5,7 +5,7 @@
     "name": "Anthony Shew",
     "url": "https://twitter.com/anthonysheww"
   },
-  "version": "0.0.6",
+  "version": "0.0.7-canary.0",
   "main": "dist/bin.js",
   "bin": "dist/bin.js",
   "files": [

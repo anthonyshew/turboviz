@@ -20,14 +20,11 @@
     "start:all": "turbo start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "typecheck": "turbo typecheck --continue",
-    "prepare": "husky install"
+    "typecheck": "turbo typecheck --continue"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
     "@types/node": "^18.15.11",
-    "eslint-config-custom": "workspace:*",
-    "husky": "^8.0.0",
     "prettier": "latest",
     "turbo": "latest"
   },

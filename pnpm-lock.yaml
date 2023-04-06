@@ -10,12 +10,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:packages/eslint-config-custom
-      husky:
-        specifier: ^8.0.0
-        version: 8.0.0
       prettier:
         specifier: latest
         version: 2.8.7
@@ -3687,12 +3681,6 @@ packages:
   /human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
-    dev: true
-
-  /husky@8.0.0:
-    resolution: {integrity: sha512-4qbE/5dzNDNxFEkX9MNRPKl5+omTXQzdILCUWiqG/lWIAioiM5vln265/l6I2Zx8gpW8l1ukZwGQeCFbBZ6+6w==}
-    engines: {node: '>=14'}
-    hasBin: true
     dev: true
 
   /iconv-lite@0.4.24:

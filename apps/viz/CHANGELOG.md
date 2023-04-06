@@ -1,5 +1,11 @@
 # @ashew/turboviz
 
+## 0.0.7-canary.0
+
+### Patch Changes
+
+- 86f35fd: Moving things to devDeps.
+
 ## 0.0.6
 
 ### Patch Changes
