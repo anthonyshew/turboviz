@@ -1,5 +1,12 @@
 # @ashew/turboviz
 
+## 0.0.7
+
+### Patch Changes
+
+- 0124ce1: Release for 0.0.7
+- 86f35fd: Moving things to devDeps.
+
 ## 0.0.7-canary.0
 
 ### Patch Changes
