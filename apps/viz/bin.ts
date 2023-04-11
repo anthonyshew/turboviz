@@ -4,7 +4,7 @@ import express from "express";
 import open from "open";
 import path from "path";
 import handler from "serve-handler";
-import portfinder from "portfinder";
+import getPort, { makeRange } from 'get-port'
 import cors from "cors";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -36,16 +36,13 @@ app.get("*", (req, res) => {
 
 const devPort = process.env.NODE_ENV === "development" ? 3001 : undefined;
 
-portfinder
-  .getPortPromise({ port: devPort })
+getPort({ port: isDev ? devPort : makeRange(3000, 3999) })
   .then((port) => {
     app.listen(port);
     !isDev ? open(`http://localhost:${port}`) : null;
-    console.log("Opening your browser...");
     console.log("If your browser didn't open, visit http://localhost:" + port);
     console.log("Welcome to Turboviz.");
   })
   .catch((err) => {
-    console.error("Could not find a free port (probably).");
     throw new Error(err);
   });
