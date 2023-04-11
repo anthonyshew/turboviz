@@ -8,7 +8,7 @@ Features:
 
 - [x] Pipeline visualizer
 
-![Pipeline visualizer](../../assets/graph.png)
+![Pipeline visualizer](/assets/graph.png)
 
 - [ ] Internal Dependency mapper
 - [ ] Single version dep checker
