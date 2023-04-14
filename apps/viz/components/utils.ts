@@ -1,5 +1,5 @@
 import { Edge, Node } from "reactflow";
-import { Turbotask } from "../types";
+import { Turbotask } from "../utils/types";
 import { TurboNodeData } from "./TurboNode";
 
 // dagre doesn't have types but that's okay :)

@@ -14,7 +14,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import TurboNode, { TurboNodeData } from "./TurboNode";
 import TurboEdge from "./TurboEdge";
-import { Turbotask } from "../types";
+import { Turbotask } from "../utils/types";
 import {
   edgesBuilder,
   filterEmptyTasks,

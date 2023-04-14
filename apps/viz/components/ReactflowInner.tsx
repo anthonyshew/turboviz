@@ -1,6 +1,6 @@
 import { Node, Edge } from "reactflow";
 import "reactflow/dist/style.css";
-import { Turbotask } from "../types";
+import { Turbotask } from "../utils/types";
 import { Reactflow } from "./Reactflow";
 import { TurboNodeData } from "./TurboNode";
 import {

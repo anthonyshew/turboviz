@@ -30,10 +30,12 @@ const Page = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         setIsLoading(false);
         setTaskList(
+          // This changed in 1.9!
           // @ts-ignore
-          Object.keys(res.globalHashSummary.pipeline).map((t: string) => ({
+          Object.keys(res.globalCacheInputs.rootPipeline).map((t: string) => ({
             value: t,
             label: t,
           }))

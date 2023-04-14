@@ -12,9 +12,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo dev --filter=@ashew/turboviz",
+    "dev": "turbo dev dev:bin --filter=@ashew/turboviz",
     "build": "turbo build --filter=@ashew/turboviz",
     "start": "node ./apps/viz/dist/bin.js",
+    "start:debug": "DEBUG=1 node --inspect ./apps/viz/dist/bin.js",
     "build:all": "turbo build",
     "dev:all": "turbo dev",
     "start:all": "turbo start",
@@ -26,7 +27,7 @@
     "@changesets/cli": "^2.26.1",
     "@types/node": "^18.15.11",
     "prettier": "latest",
-    "turbo": "canary"
+    "turbo": "~1.9.0"
   },
   "packageManager": "pnpm@8.0.0",
   "bugs": {

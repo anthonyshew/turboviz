@@ -6,26 +6,59 @@ import path from "path";
 import handler from "serve-handler";
 import getPort, { makeRange } from 'get-port'
 import cors from "cors";
+import { dryVersionOnePointNine, dryVersionPreOnePointNine } from './utils/types'
+import { createResponse } from "./utils/server";
 
+console.log(process.env.NODE_ENV)
 const isDev = process.env.NODE_ENV === "development";
+const isDebug = Boolean(process.env.DEBUG)
 
 const app = express();
+
+const logger = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (isDev || isDebug) {
+    let send = res.send;
+    res.send = log => {
+      console.log(`Code: ${res.statusCode}`);
+      console.log("Body: ", log.body);
+      res.send = send;
+      return res.send(log);
+    }
+  }
+
+  next()
+}
 
 app.use(express.json());
 app.use(cors());
 
-app.post("/create-dry", (req, res) => {
+app.post("/create-dry", logger, async (req, res) => {
   const taskName = req.body.taskName;
 
+  const graphBuffer = execSync(`turbo ${taskName} --dry=json`);
+  const dryResult = JSON.parse(graphBuffer.toString());
+
   try {
-    const graphBuffer = execSync(`turbo ${taskName} --dry=json`);
-    const result = JSON.parse(graphBuffer.toString());
-    return res.json(result);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Something went wrong." });
-  }
-});
+    const preOnePointNine = dryVersionPreOnePointNine.parse(dryResult)
+    return createResponse(res, true, preOnePointNine)
+
+  } catch (error) { }
+
+  try {
+    const onePointNine = dryVersionOnePointNine.parse(dryResult)
+    return createResponse(res, true, {
+      tasks: onePointNine.tasks,
+      packages: onePointNine.tasks
+    }
+    )
+
+  } catch (error) { }
+
+  return createResponse(res, false, {
+    message: "Could not parse payload as pre or post 1.9 version. Please make a Github issue with a copy of your --dry=json.",
+    data: {}
+  })
+})
 
 app.get("*", (req, res) => {
   if (isDev) return res.send("You're probably looking for port 3000.");
