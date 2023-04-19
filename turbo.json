@@ -12,7 +12,9 @@
     "start": {
       "persistent": true
     },
-    "typecheck": {},
+    "typecheck": {
+      "outputMode": "errors-only"
+    },
     "dev": {
       "cache": false,
       "persistent": true

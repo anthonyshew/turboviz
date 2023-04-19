@@ -1,21 +1,21 @@
-import { Node, Edge } from "reactflow";
 import "reactflow/dist/style.css";
-import { Turbotask } from "../utils/types";
+import { Edge, Node } from "reactflow";
 import { Reactflow } from "./Reactflow";
 import { TurboNodeData } from "./TurboNode";
 import {
-  filterEmptyTasks,
+  // filterEmptyTasks,
   formatTaskToNode,
   topLevelTasks,
   edgesBuilder,
   getLayoutedElements,
 } from "./utils";
+import { Turbotask } from "../utils/types";
 
 export const ReactFlowInner = ({
   tasks,
   activeTask,
 }: {
-  tasks: Turbotask[];
+  tasks: Array<Turbotask>;
   activeTask: string;
 }) => {
   const initialNodes: Node<TurboNodeData>[] = [
@@ -25,7 +25,8 @@ export const ReactFlowInner = ({
       position: { x: 0, y: 0 },
       type: "turbo",
     },
-    ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
+    // ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
+    ...tasks.map(formatTaskToNode),
   ];
 
   const initialEdges: Edge[] = [

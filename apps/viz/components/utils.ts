@@ -12,8 +12,8 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 const nodeWidth = 350;
 const nodeHeight = 50;
 
-export const filterEmptyTasks = (task: Turbotask) =>
-  !task.command.includes("NONEXISTENT");
+// export const filterEmptyTasks = (task: Turbotask) =>
+//   !task.command?.includes("NONEXISTENT");
 
 export const edgesBuilder = (taskList: Turbotask[]): Edge[] => {
   const edgesArr: Edge[] = [];

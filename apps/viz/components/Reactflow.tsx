@@ -17,7 +17,6 @@ import TurboEdge from "./TurboEdge";
 import { Turbotask } from "../utils/types";
 import {
   edgesBuilder,
-  filterEmptyTasks,
   formatTaskToNode,
   getLayoutedElements,
   topLevelTasks,
@@ -54,7 +53,8 @@ export function Reactflow({
         position: { x: 0, y: 0 },
         type: "turbo",
       },
-      ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
+      // ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
+      ...tasks.map(formatTaskToNode),
     ];
 
     const nextEdges: Edge[] = [

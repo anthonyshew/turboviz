@@ -6,21 +6,24 @@ import path from "path";
 import handler from "serve-handler";
 import getPort, { makeRange } from 'get-port'
 import cors from "cors";
-import { dryVersionOnePointNine, dryVersionPreOnePointNine } from './utils/types'
+import { dryVersionOnePointNine, dryVersionPreOnePointNine } from './utils/validators'
+import { DryVersionOnePointNine, DryVersionPreOnePointNine, Routes } from "./utils/types";
 import { createResponse } from "./utils/server";
 
-console.log(process.env.NODE_ENV)
 const isDev = process.env.NODE_ENV === "development";
 const isDebug = Boolean(process.env.DEBUG)
 
 const app = express();
+
+app.use(express.json());
+app.use(cors());
 
 const logger = (req: express.Request, res: express.Response, next: express.NextFunction) => {
   if (isDev || isDebug) {
     let send = res.send;
     res.send = log => {
       console.log(`Code: ${res.statusCode}`);
-      console.log("Body: ", log.body);
+      console.log("Body: ", JSON.parse(log));
       res.send = send;
       return res.send(log);
     }
@@ -29,29 +32,41 @@ const logger = (req: express.Request, res: express.Response, next: express.NextF
   next()
 }
 
-app.use(express.json());
-app.use(cors());
-
-app.post("/create-dry", logger, async (req, res) => {
+app.post("/create-dry", logger, async (
+  req: express.Request<
+    {},
+    {},
+    Routes["create-dry"]["inputs"]
+  >,
+  res: express.Response<Routes["create-dry"]["outputs"]>
+) => {
   const taskName = req.body.taskName;
 
-  const graphBuffer = execSync(`turbo ${taskName} --dry=json`);
-  const dryResult = JSON.parse(graphBuffer.toString());
+  let dryResult: any = null
+
+  try {
+    const graphBuffer = execSync(`turbo ${taskName} --dry=json`);
+    dryResult = JSON.parse(graphBuffer.toString());
+  } catch (error) {
+    return createResponse(res, false, {
+      message: "We weren't able to create your dry graph. Check your turbo.json for possible errors.",
+      data: {}
+    })
+
+  }
 
   try {
     const preOnePointNine = dryVersionPreOnePointNine.parse(dryResult)
-    return createResponse(res, true, preOnePointNine)
+    return createResponse<DryVersionPreOnePointNine>(res, true, preOnePointNine)
 
   } catch (error) { }
 
   try {
     const onePointNine = dryVersionOnePointNine.parse(dryResult)
-    return createResponse(res, true, {
+    return createResponse<Pick<DryVersionOnePointNine, "tasks" | "packages">>(res, true, {
       tasks: onePointNine.tasks,
-      packages: onePointNine.tasks
-    }
-    )
-
+      packages: onePointNine.packages,
+    })
   } catch (error) { }
 
   return createResponse(res, false, {

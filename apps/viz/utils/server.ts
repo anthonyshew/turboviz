@@ -1,23 +1,23 @@
 import express from "express"
 
-type ErrorFormat = {
+export type ErrorFormat<T> = {
   message: string
-  data: Record<any, any>
+  data: T
 }
 
-type SuccessFormat = Record<any, any>
+export type SuccessFormat<T> = T
 
-export const createResponse = (
+export const createResponse = <T>(
   ...[res, success, data]: [
     res: express.Response,
     success: true,
-    data: SuccessFormat
+    data: SuccessFormat<T>
   ] | [
     res: express.Response,
     success: false,
-    data?: ErrorFormat
+    data?: ErrorFormat<T>
   ]
 ) => {
   const status = success ? 200 : 500
-  return res.status(status).json({ success, data })
+  return res.status(status).json({ ...data, success })
 }
