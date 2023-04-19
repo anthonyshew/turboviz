@@ -19,7 +19,7 @@ export const edgesBuilder = (taskList: Turbotask[]): Edge[] => {
   const edgesArr: Edge[] = [];
 
   taskList.forEach((task) => {
-    task.dependencies.forEach((dep: any) => {
+    task.dependencies.forEach((dep) => {
       edgesArr.push({
         id: `${task.taskId}-${dep}`,
         source: task.taskId,

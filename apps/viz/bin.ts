@@ -42,7 +42,7 @@ app.post("/create-dry", logger, async (
 ) => {
   const taskName = req.body.taskName;
 
-  let dryResult: any = null
+  let dryResult: unknown = null
 
   try {
     const graphBuffer = execSync(`turbo ${taskName} --dry=json`);
