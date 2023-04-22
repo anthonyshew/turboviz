@@ -49,7 +49,7 @@ app.post("/create-dry", logger, async (
     dryResult = JSON.parse(graphBuffer.toString());
   } catch (error) {
     return createResponse(res, false, {
-      message: "We weren't able to create your dry graph. Check your turbo.json for possible errors.",
+      message: "We weren't able to create your dry graph. Check your turbo.json for errors.",
       data: {}
     })
 

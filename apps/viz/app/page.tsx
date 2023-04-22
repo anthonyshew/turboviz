@@ -7,13 +7,11 @@ import { useDry } from "./hooks";
 
 const Page = () => {
   const [workspace, setWorkspace] = useState(null);
-  const [workspaceList, setWorkspaceList] = useState([]);
   const [taskName, setTaskName] = useState("build");
-  const [taskList, setTaskList] = useState([]);
 
   const { data, isLoading, error } = useDry({ taskName, workspace });
 
-  if (error) return <p>{error.message}</p>;
+  if (error) return <p className="text-white">{error.message}</p>;
 
   if (isLoading) {
     return (
@@ -23,17 +21,29 @@ const Page = () => {
     );
   }
 
-  if (data?.data.tasks) {
+  if (data?.tasks) {
     return (
-      <div>
-        <Select options={taskList} title="Tasks" onChange={setTaskName} />
-        <Select
-          options={workspaceList}
-          title="Workspaces"
-          onChange={setWorkspace}
-        />
-        <ReactFlowInner tasks={data.data.tasks} activeTask={taskName} />
-      </div>
+      <>
+        <div>
+          <Select
+            options={data.tasks.map((task) => {
+              console.log(task);
+              return {
+                label: task.task,
+                value: task.task,
+              };
+            })}
+            title="Tasks"
+            onChange={setTaskName}
+          />
+          <Select
+            options={data.packages.map((pkg) => ({ label: pkg, value: pkg }))}
+            title="Workspaces"
+            onChange={setWorkspace}
+          />
+        </div>
+        {/* <ReactFlowInner tasks={data.tasks} activeTask={taskName} /> */}
+      </>
     );
   }
 
