@@ -65,5 +65,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/anthonyshew/turboviz/issues"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.0.1",
+    "class-variance-authority": "^0.5.2"
   }
 }

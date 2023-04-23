@@ -6,6 +6,7 @@ import path from "path";
 import handler from "serve-handler";
 import getPort, { makeRange } from 'get-port'
 import cors from "cors";
+import { readFile } from 'fs/promises'
 import { dryVersionOnePointNine, dryVersionPreOnePointNine } from './utils/validators'
 import { DryVersionOnePointNine, DryVersionPreOnePointNine, Routes } from "./utils/types";
 import { createResponse } from "./utils/server";
@@ -52,13 +53,11 @@ app.post("/create-dry", logger, async (
       message: "We weren't able to create your dry graph. Check your turbo.json for errors.",
       data: {}
     })
-
   }
 
   try {
     const preOnePointNine = dryVersionPreOnePointNine.parse(dryResult)
     return createResponse<DryVersionPreOnePointNine>(res, true, preOnePointNine)
-
   } catch (error) { }
 
   try {

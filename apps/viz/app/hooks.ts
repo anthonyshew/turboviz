@@ -32,3 +32,7 @@ export const useDry = ({ taskName, workspace }: Routes["create-dry"]["inputs"]) 
       })
   )
 }
+
+export const useResolvedDry = () => {
+  return useSWR<Return, Error>(`${fetchRoot}/create-dry`)
+}
