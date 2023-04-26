@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { Input } from "../components/Input";
 import { Label } from "../components/Label";
 import { Select } from "../components/Select";
-import { ReactFlowInner } from "../components/ReactflowInner";
+import { ReactFlowOuter } from "../components/ReactflowOuter";
+import { GraphDirection } from "../utils/types";
 
 export default function Page() {
   const [workspace, setWorkspace] = useState(null);
   const [taskName, setTaskName] = useState("build");
-  const { data, isLoading, error, mutate } = useDry({
+  const [direction, setDirection] = useState<GraphDirection>("LR");
+  const { data, isValidating, error, mutate } = useDry({
     taskName,
     workspace,
   });
@@ -37,6 +39,11 @@ export default function Page() {
               setTaskName(e.target.value);
             }}
           />
+          <button
+            onClick={() => setDirection((val) => (val === "LR" ? "RL" : "LR"))}
+          >
+            Currently: {direction}
+          </button>
           {data?.packages ? (
             <Select
               options={data.packages.map((pkg) => ({ label: pkg, value: pkg }))}
@@ -45,7 +52,7 @@ export default function Page() {
             />
           ) : null}
         </div>
-        {isLoading ? (
+        {isValidating ? (
           <div className="flex flex-col items-center justify-center min-w-full min-h-screen bg-black">
             <p className="text-white">Mapping your Turboverse...</p>
           </div>
@@ -55,8 +62,12 @@ export default function Page() {
             <p className="text-white">{error.message}</p>
           </div>
         ) : null}
-        {data?.tasks && !error ? (
-          <ReactFlowInner tasks={data.tasks} activeTask={taskName} />
+        {!isValidating && !error && data?.tasks ? (
+          <ReactFlowOuter
+            tasks={data.tasks}
+            activeTask={taskName}
+            direction={direction}
+          />
         ) : null}
       </body>
     </html>

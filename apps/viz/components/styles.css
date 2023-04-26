@@ -130,14 +130,6 @@
   opacity: 0;
 }
 
-.react-flow__handle.source {
-  right: -10px;
-}
-
-.react-flow__handle.target {
-  left: -10px;
-}
-
 .react-flow__node:focus {
   outline: none;
 }

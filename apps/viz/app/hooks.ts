@@ -29,7 +29,7 @@ export const useDry = ({ taskName, workspace }: Routes["create-dry"]["inputs"]) 
         }
 
         return res
-      }), { refreshInterval: 1000 }
+      })
   )
 }
 

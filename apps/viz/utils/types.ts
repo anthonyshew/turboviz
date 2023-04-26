@@ -8,6 +8,7 @@ import {
   oneNineTask
 } from './validators'
 
+export type GraphDirection = "LR" | "RL" | "TB" | "BT"
 export type TaskConfiguration = z.infer<typeof taskConfiguration>
 export type PreOneNineTask = z.infer<typeof preOneNineTask>;
 export type OneNineTask = z.infer<typeof oneNineTask>;

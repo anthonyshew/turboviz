@@ -3,20 +3,21 @@ import { Edge, Node } from "reactflow";
 import { Reactflow } from "./Reactflow";
 import { TurboNodeData } from "./TurboNode";
 import {
-  // filterEmptyTasks,
   formatTaskToNode,
   topLevelTasks,
   edgesBuilder,
   getLayoutedElements,
 } from "./utils";
-import { Turbotask } from "../utils/types";
+import { GraphDirection, Turbotask } from "../utils/types";
 
-export const ReactFlowInner = ({
+export const ReactFlowOuter = ({
   tasks,
   activeTask,
+  direction,
 }: {
   tasks: Array<Turbotask>;
   activeTask: string;
+  direction: GraphDirection;
 }) => {
   const initialNodes: Node<TurboNodeData>[] = [
     {
@@ -25,7 +26,6 @@ export const ReactFlowInner = ({
       position: { x: 0, y: 0 },
       type: "turbo",
     },
-    // ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
     ...tasks.map(formatTaskToNode),
   ];
 
@@ -48,6 +48,7 @@ export const ReactFlowInner = ({
 
   return (
     <Reactflow
+      direction={direction}
       initialNodes={layoutedNodes}
       initialEdges={layoutedEdges}
       tasks={tasks}

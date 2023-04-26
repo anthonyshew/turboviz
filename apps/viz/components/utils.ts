@@ -1,5 +1,5 @@
-import { Edge, Node } from "reactflow";
-import { Turbotask } from "../utils/types";
+import { Edge, Node, Position } from "reactflow";
+import { GraphDirection, Turbotask } from "../utils/types";
 import { TurboNodeData } from "./TurboNode";
 
 // dagre doesn't have types but that's okay :)
@@ -11,9 +11,6 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 const nodeWidth = 350;
 const nodeHeight = 50;
-
-// export const filterEmptyTasks = (task: Turbotask) =>
-//   !task.command?.includes("NONEXISTENT");
 
 export const edgesBuilder = (taskList: Turbotask[]): Edge[] => {
   const edgesArr: Edge[] = [];
@@ -45,8 +42,12 @@ export const formatTaskToNode = (
 export const topLevelTasks = (tasks: Turbotask[]) =>
   tasks.filter((task) => !task.dependents.length).map(formatTaskToNode);
 
-export const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
-  dagreGraph.setGraph({ rankdir: "LR" });
+export const getLayoutedElements = (
+  nodes: Node[],
+  edges: Edge[],
+  direction: GraphDirection = "LR"
+) => {
+  dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach((node) => {
     dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
@@ -58,12 +59,37 @@ export const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
 
   dagre.layout(dagreGraph);
 
+  const handleDirection = (dir: GraphDirection): [
+    Position,
+    Position
+  ] => {
+    if (dir === "BT") {
+      return [
+        Position.Top,
+        Position.Bottom
+      ]
+    }
+
+    if (dir === "TB") {
+      return [
+        Position.Bottom,
+        Position.Top
+      ]
+    }
+
+    if (dir === "RL") {
+      return [
+        Position.Left,
+        Position.Right
+      ]
+    }
+    return [Position.Right, Position.Left]
+  }
+
   nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    // @ts-ignore
-    node.targetPosition = "left";
-    // @ts-ignore
-    node.sourcePosition = "right";
+    node.targetPosition = handleDirection(direction)[0];
+    node.sourcePosition = handleDirection(direction)[1];
 
     // We are shifting the dagre node position (anchor=center center) to the top left
     // so it matches the React Flow node anchor point (top left).

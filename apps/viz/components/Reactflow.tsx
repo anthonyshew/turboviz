@@ -14,7 +14,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import TurboNode, { TurboNodeData } from "./TurboNode";
 import TurboEdge from "./TurboEdge";
-import { Turbotask } from "../utils/types";
+import { GraphDirection, Turbotask } from "../utils/types";
 import {
   edgesBuilder,
   formatTaskToNode,
@@ -35,11 +35,13 @@ export function Reactflow({
   initialEdges,
   tasks,
   activeTask,
+  direction,
 }: {
   initialNodes: Node[];
   initialEdges: Edge[];
   tasks: Turbotask[];
   activeTask: string;
+  direction: GraphDirection;
 }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -53,7 +55,6 @@ export function Reactflow({
         position: { x: 0, y: 0 },
         type: "turbo",
       },
-      // ...tasks.filter(filterEmptyTasks).map(formatTaskToNode),
       ...tasks.map(formatTaskToNode),
     ];
 
@@ -69,11 +70,14 @@ export function Reactflow({
       ...edgesBuilder(tasks),
     ];
 
-    const { nodes, edges } = getLayoutedElements(nextNodes, nextEdges);
+    const { nodes, edges } = getLayoutedElements(
+      nextNodes,
+      nextEdges,
+      direction
+    );
 
     setNodes(nodes);
     setEdges(edges);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks, activeTask]);
 
   const getNeighbors = (targetId: string) => {
@@ -103,56 +107,75 @@ export function Reactflow({
     );
   };
 
-  // const handleTransform = useCallback(() => {
-  //   setViewport({ x: 0, y: 0, zoom: 1 }, { duration: 800 });
-  // }, [setViewport]);
-
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 
-  return (
-    <ReactFlow
-      style={{ minHeight: "100vh" }}
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      nodeTypes={nodeTypes}
-      edgeTypes={edgeTypes}
-      onConnect={onConnect}
-      onNodeMouseEnter={(e) =>
-        // @ts-ignore
-        getNeighbors(e.target.id)
-      }
-      onNodeMouseLeave={() => resetDim()}
-      fitView
-    >
-      {/* <MiniMap /> */}
-      <Controls />
-      <Background />
-      <svg>
-        <defs>
-          <linearGradient id="edge-gradient">
-            <stop offset="0%" stopColor="#ae53ba" />
-            <stop offset="100%" stopColor="#2a8af6" />
-          </linearGradient>
+  const onLayout = useCallback(
+    (dir: GraphDirection) => {
+      const { nodes: layoutedNodes, edges: layoutedEdges } =
+        getLayoutedElements(nodes, edges, dir);
 
-          <marker
-            id="edge-circle"
-            viewBox="-5 -5 10 10"
-            refX="0"
-            refY="0"
-            markerUnits="strokeWidth"
-            markerWidth="10"
-            markerHeight="10"
-            orient="auto"
-          >
-            <circle stroke="#2a8af6" strokeOpacity="0.75" r="2" cx="0" cy="0" />
-          </marker>
-        </defs>
-      </svg>
-    </ReactFlow>
+      setNodes([...layoutedNodes]);
+      setEdges([...layoutedEdges]);
+    },
+    [nodes, edges]
+  );
+
+  useEffect(() => {
+    onLayout(direction);
+  }, [direction]);
+
+  return (
+    <>
+      <ReactFlow
+        style={{ minHeight: "100vh" }}
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        onConnect={onConnect}
+        onNodeMouseEnter={(e) =>
+          // @ts-ignore
+          getNeighbors(e.target.id)
+        }
+        onNodeMouseLeave={() => resetDim()}
+        fitView
+      >
+        {/* <MiniMap /> */}
+        <Controls />
+        <Background />
+        <svg>
+          <defs>
+            <linearGradient id="edge-gradient">
+              <stop offset="0%" stopColor="#ae53ba" />
+              <stop offset="100%" stopColor="#2a8af6" />
+            </linearGradient>
+
+            <marker
+              id="edge-circle"
+              viewBox="-5 -5 10 10"
+              refX="0"
+              refY="0"
+              markerUnits="strokeWidth"
+              markerWidth="10"
+              markerHeight="10"
+              orient="auto"
+            >
+              <circle
+                stroke="#2a8af6"
+                strokeOpacity="0.75"
+                r="2"
+                cx="0"
+                cy="0"
+              />
+            </marker>
+          </defs>
+        </svg>
+      </ReactFlow>
+    </>
   );
 }

@@ -8,23 +8,24 @@ export type TurboNodeData = {
   subline?: string;
 };
 
-// eslint-disable-next-line react/display-name
-export default memo(({ data }: NodeProps<TurboNodeData>) => {
-  return (
-    <>
-      <div id={data.id} className="wrapper gradient">
-        <div id={data.id} className="inner">
-          <div id={data.id} className="body">
-            {data.icon && <div className="icon">{data.icon}</div>}
-            <div>
-              <div className="title">{data.title}</div>
-              {data.subline && <div className="subline">{data.subline}</div>}
+export default memo(
+  ({ data, sourcePosition, targetPosition }: NodeProps<TurboNodeData>) => {
+    return (
+      <>
+        <div id={data.id} className="wrapper gradient">
+          <div id={data.id} className="inner">
+            <div id={data.id} className="body">
+              {data.icon && <div className="icon">{data.icon}</div>}
+              <div>
+                <div className="title">{data.title}</div>
+                {data.subline && <div className="subline">{data.subline}</div>}
+              </div>
             </div>
+            <Handle type="target" position={sourcePosition!} />
+            <Handle type="source" position={targetPosition!} />{" "}
           </div>
-          <Handle type="target" position={Position.Left} />
-          <Handle type="source" position={Position.Right} />
         </div>
-      </div>
-    </>
-  );
-});
+      </>
+    );
+  }
+);
